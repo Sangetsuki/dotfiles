@@ -1,0 +1,19 @@
+Config { font = "xft:Hack Nerd Font:size=10"
+       , bgColor = "black"
+       , fgColor = "white"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ 
+                      Run Wireless "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 50
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 50
+                    , Run Battery ["-t","<acstatus>: <left>%","--","-O","AC","-o","Bat","-h","green","-l","red"] 600
+                    --, Run Memory ["-t","Mem: <usedratio>%"] 50
+                    --, Run Swap [] 50
+                    , Run Com "uname" ["-s","-r"] "" 36000
+    		    , Run Date "%A  %d/%m/%Y %H:%M:%S" "date" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%cpu% | %battery% | %wlan0wi% } <fc=#ee9a00>%date%</fc> { %StdinReader% | %uname%"
+       }
